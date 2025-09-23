@@ -150,12 +150,16 @@ Modify build commands to include custom arguments:
    - Verify all dependencies are properly declared
    - Check for platform-specific issues
 
-2. **Deployment Failures**
+2. **Format Command Errors**
+   - Use `dart format` instead of deprecated `flutter format`
+   - The `flutter format` command was removed in newer Flutter versions
+
+3. **Deployment Failures**
    - Verify secrets are properly configured
    - Check repository permissions
    - Ensure target platforms are properly set up
 
-3. **Test Failures**
+4. **Test Failures**
    - Run tests locally first
    - Check for environment-specific test issues
    - Verify test coverage requirements
@@ -164,6 +168,7 @@ Modify build commands to include custom arguments:
 - Check workflow logs in the Actions tab
 - Use `flutter doctor` in workflows to diagnose issues
 - Enable debug logging with `--verbose` flags
+- Use `dart format` instead of deprecated `flutter format`
 
 ## Best Practices
 
