@@ -6,13 +6,16 @@ A Flutter application that allows users to search for books using the Open Libra
 
 - **Search Books**: Search for books by title using the Open Library API
 - **Book Details**: View detailed information about books with animated cover rotation
-- **Local Storage**: Save books locally using SQLite database
+- **Local Storage**: Save books locally using SQLite database with proper schema
+- **Save/Remove Books**: Save books to local collection with success/remove notifications
 - **Pull-to-Refresh**: Refresh search results with pull-to-refresh gesture
 - **Shimmer Loading**: Beautiful shimmer loading animations
 - **Error Handling**: Comprehensive error handling with user-friendly messages
 - **Clean Architecture**: Well-structured code following clean architecture principles
 - **BLoC State Management**: Reactive state management using BLoC pattern
-- **Unit Tests**: Comprehensive unit tests for business logic
+- **Dependency Injection**: Proper DI setup with GetIt for testable code
+- **Responsive Design**: Mobile and desktop layouts with adaptive UI
+- **Snackbar Notifications**: User feedback for save/remove operations
 
 ## Architecture
 
@@ -50,6 +53,23 @@ The app follows Clean Architecture principles with three main layers:
 - **equatable**: Value equality
 - **get_it**: Dependency injection
 
+## Recent Updates & Fixes
+
+### Version 1.1.0 - Current Implementation
+- ✅ **Fixed Database Dependency Injection**: Resolved GetIt registration conflicts
+- ✅ **Enhanced Book Saving**: Fixed database schema and save functionality
+- ✅ **Added User Feedback**: Implemented snackbar notifications for save/remove actions
+- ✅ **Improved Error Handling**: Added comprehensive debugging and error logging
+- ✅ **Database Schema Fix**: Added missing `created_at` field for proper book storage
+- ✅ **Code Cleanup**: Removed test files and optimized dependency injection
+
+### Key Technical Improvements
+- **DatabaseHelper Integration**: Books now use DatabaseHelper instead of direct Database injection
+- **Proper State Management**: Fixed BookDetailsBloc state transitions
+- **Enhanced UX**: Color-coded snackbar messages (green for save, orange for remove)
+- **Debug Logging**: Added comprehensive logging for troubleshooting
+- **Schema Validation**: Ensured all required database fields are populated
+
 ## Getting Started
 
 1. **Prerequisites**
@@ -60,13 +80,20 @@ The app follows Clean Architecture principles with three main layers:
 
 2. **Installation**
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/mgpsr2510/book_finder_app.git
    cd book_finder_app
    flutter pub get
    ```
 
 3. **Run the app**
    ```bash
+   flutter run
+   ```
+
+4. **Clean Build (if needed)**
+   ```bash
+   flutter clean
+   flutter pub get
    flutter run
    ```
 
@@ -122,10 +149,12 @@ The app includes comprehensive unit tests for:
 
 ### Book Details Screen
 - Animated book cover with rotation effect
-- Complete book information display
-- Save/Remove book functionality
+- Complete book information display (title, authors, description, publish date, etc.)
+- Save/Remove book functionality with visual feedback
+- Snackbar notifications for user actions
 - Beautiful gradient background
-- Responsive design
+- Responsive design for mobile and desktop
+- Real-time save status updates
 
 ### State Management
 - **SearchBloc**: Manages search functionality and pagination
@@ -149,6 +178,37 @@ The app implements comprehensive error handling:
 - Database indexing for fast queries
 - Memory-efficient image loading
 
+## Troubleshooting
+
+### Common Issues & Solutions
+
+1. **"Type Database is already registered" Error**
+   - **Solution**: This has been fixed in the current implementation
+   - The app now uses DatabaseHelper instead of direct Database injection
+
+2. **"Failed to save book" Error**
+   - **Solution**: Database schema has been updated with required `created_at` field
+   - All book data now includes proper timestamp
+
+3. **Book Details Not Loading**
+   - **Solution**: Added comprehensive debugging - check console logs
+   - API calls are working correctly with proper error handling
+
+4. **Build Issues**
+   - **Solution**: Run `flutter clean` and `flutter pub get`
+   - Ensure you're using Flutter SDK 3.8.1 or higher
+
+5. **Database Issues**
+   - **Solution**: The app automatically handles database creation and upgrades
+   - Database path is logged for debugging purposes
+
+### Debug Information
+The app includes comprehensive logging for troubleshooting:
+- Database initialization logs
+- API call logs with URLs and responses
+- Book parsing logs
+- Error details with stack traces
+
 ## Future Enhancements
 
 - Offline search capabilities
@@ -158,6 +218,41 @@ The app implements comprehensive error handling:
 - Social features (reviews, ratings)
 - Dark theme support
 - Advanced search filters
+- Book recommendations
+- Export saved books
+
+## Implementation Status
+
+### ✅ Completed Features
+- [x] Book search functionality with Open Library API
+- [x] Book details page with comprehensive information
+- [x] Local SQLite database for saving books
+- [x] Save/Remove book functionality
+- [x] User feedback with snackbar notifications
+- [x] Responsive design for mobile and desktop
+- [x] Error handling and debugging
+- [x] Clean architecture implementation
+- [x] BLoC state management
+- [x] Dependency injection setup
+- [x] Database schema with proper fields
+- [x] Image caching and loading
+- [x] Pull-to-refresh functionality
+- [x] Shimmer loading animations
+
+### 🔧 Technical Implementation
+- **Architecture**: Clean Architecture with 3 layers (Presentation, Domain, Data)
+- **State Management**: BLoC pattern with flutter_bloc
+- **Database**: SQLite with sqflite package
+- **API Integration**: Open Library API with Dio HTTP client
+- **Dependency Injection**: GetIt for service locator pattern
+- **Error Handling**: Comprehensive error handling with Either pattern
+- **UI/UX**: Material Design with custom animations and responsive layouts
+
+### 📱 Current Version
+- **Version**: 1.1.0
+- **Flutter SDK**: 3.8.1+
+- **Dart SDK**: 3.0.0+
+- **Status**: Production Ready
 
 ## Contributing
 
