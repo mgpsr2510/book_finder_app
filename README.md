@@ -97,6 +97,39 @@ The app follows Clean Architecture principles with three main layers:
    flutter run
    ```
 
+## GitHub Actions Deployment
+
+The project includes comprehensive GitHub Actions workflows for automated building and deployment:
+
+### 🚀 Automated Deployment
+- **GitHub Pages**: Web app automatically deploys on push to main branch
+- **Android APK**: Builds APK and App Bundle on releases
+- **Continuous Integration**: Runs tests and quality checks on every push
+- **Code Quality**: Automated linting, formatting, and coverage checks
+
+### 📋 Available Workflows
+- `flutter-build.yml` - Main build and deployment pipeline
+- `ci.yml` - Continuous integration checks
+- `deploy-android.yml` - Android Play Store deployment
+- `deploy-firebase.yml` - Firebase Hosting deployment
+- `code-quality.yml` - Code quality and coverage checks
+
+### 🔧 Setup GitHub Actions
+1. **Enable GitHub Pages** (for web deployment):
+   - Go to repository Settings → Pages
+   - Set source to "GitHub Actions"
+
+2. **Configure Secrets** (optional):
+   - `GOOGLE_PLAY_SERVICE_ACCOUNT_JSON` - For Play Store deployment
+   - `FIREBASE_SERVICE_ACCOUNT_BOOK_FINDER_APP` - For Firebase deployment
+
+3. **View Deployments**:
+   - Check Actions tab for build status
+   - Web app: `https://yourusername.github.io/book_finder_app`
+   - Download APK from Releases section
+
+For detailed setup instructions, see [.github/README.md](.github/README.md)
+
 ## API Integration
 
 The app integrates with the Open Library API:

@@ -1,0 +1,81 @@
+name: Manual Deployment
+
+on:
+  workflow_dispatch:
+    inputs:
+      platform:
+        description: 'Platform to deploy'
+        required: true
+        default: 'web'
+        type: choice
+        options:
+        - web
+        - android
+        - all
+      environment:
+        description: 'Environment'
+        required: true
+        default: 'staging'
+        type: choice
+        options:
+        - staging
+        - production
+
+jobs:
+  deploy:
+    name: Deploy ${{ github.event.inputs.platform }} to ${{ github.event.inputs.environment }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Java (if Android)
+        if: github.event.inputs.platform == 'android' || github.event.inputs.platform == 'all'
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.24.0'
+          channel: 'stable'
+          cache: true
+
+      - name: Get dependencies
+        run: flutter pub get
+
+      - name: Build Web
+        if: github.event.inputs.platform == 'web' || github.event.inputs.platform == 'all'
+        run: flutter build web --release
+
+      - name: Build Android
+        if: github.event.inputs.platform == 'android' || github.event.inputs.platform == 'all'
+        run: |
+          flutter build apk --release
+          flutter build appbundle --release
+
+      - name: Upload Web Build
+        if: github.event.inputs.platform == 'web' || github.event.inputs.platform == 'all'
+        uses: actions/upload-artifact@v4
+        with:
+          name: web-build-${{ github.event.inputs.environment }}
+          path: build/web/
+
+      - name: Upload Android Builds
+        if: github.event.inputs.platform == 'android' || github.event.inputs.platform == 'all'
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-builds-${{ github.event.inputs.environment }}
+          path: |
+            build/app/outputs/flutter-apk/app-release.apk
+            build/app/outputs/bundle/release/app-release.aab
+
+      - name: Deploy Summary
+        run: |
+          echo "## Deployment Summary" >> $GITHUB_STEP_SUMMARY
+          echo "- **Platform**: ${{ github.event.inputs.platform }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Environment**: ${{ github.event.inputs.environment }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Status**: ✅ Completed" >> $GITHUB_STEP_SUMMARY
+          echo "- **Artifacts**: Available in Actions tab" >> $GITHUB_STEP_SUMMARY
