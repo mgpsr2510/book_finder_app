@@ -106,7 +106,7 @@ FIREBASE_SERVICE_ACCOUNT_BOOK_FINDER_APP
 ## Environment Variables
 
 The workflows use the following environment variables:
-- `FLUTTER_VERSION`: 3.24.0
+- `FLUTTER_VERSION`: 3.27.0
 - `JAVA_VERSION`: 17
 - `NODE_VERSION`: 18
 
@@ -118,7 +118,7 @@ Update the `flutter-version` in all workflow files:
 - name: Setup Flutter
   uses: subosito/flutter-action@v2
   with:
-    flutter-version: '3.24.0'  # Change this
+    flutter-version: '3.27.0'  # Change this
 ```
 
 ### Adding New Platforms

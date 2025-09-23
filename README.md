@@ -73,7 +73,7 @@ The app follows Clean Architecture principles with three main layers:
 ## Getting Started
 
 1. **Prerequisites**
-   - Flutter SDK (3.8.1 or higher)
+   - Flutter SDK (3.27.0 or higher)
    - Dart SDK
    - Android Studio / VS Code
    - Android/iOS device or emulator
@@ -240,7 +240,7 @@ The app implements comprehensive error handling:
 
 ### 📱 Current Version
 - **Version**: 1.1.0
-- **Flutter SDK**: 3.8.1+
+- **Flutter SDK**: 3.27.0+
 - **Dart SDK**: 3.0.0+
 - **Status**: Production Ready
 
